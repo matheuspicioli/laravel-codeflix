@@ -2,22 +2,21 @@
 
 namespace CodeFlix\Http\Controllers\Admin;
 
-use CodeFlix\Forms\SerieForm;
-use CodeFlix\Models\Serie;
-use CodeFlix\Http\Controllers\Controller;
-use CodeFlix\Repositories\SerieRepository;
-use Illuminate\Database\Eloquent\Model;
+use CodeFlix\Forms\VideoForm;
+use CodeFlix\Models\Video;
+use CodeFlix\Repositories\VideoRepository;
 use Illuminate\Http\Request;
+use CodeFlix\Http\Controllers\Controller;
 
-class SeriesController extends Controller
+class VideosController extends Controller
 {
 
     /**
-     * @var SerieRepository
+     * @var VideoRepository
      */
     private $repository;
 
-    public function __construct(SerieRepository $repository)
+    public function __construct(VideoRepository $repository)
     {
         $this->repository = $repository;
     }
@@ -29,8 +28,8 @@ class SeriesController extends Controller
      */
     public function index()
     {
-        $series = $this->repository->paginate();
-        return view('admin.series.index', compact('series'));
+        $videos = $this->repository->paginate();
+        return view('admin.videos.index', compact('videos'));
     }
 
     /**
@@ -40,12 +39,12 @@ class SeriesController extends Controller
      */
     public function create()
     {
-        $form = \FormBuilder::create(SerieForm::class, [
-            'url'       => route('admin.series.store'),
+        $form = \FormBuilder::create(VideoForm::class, [
+            'url'       => route('admin.videos.store'),
             'method'    => 'POST'
         ]);
 
-        return view('admin.series.create', compact('form'));
+        return view('admin.videos.create', compact('form'));
     }
 
     /**
@@ -56,76 +55,77 @@ class SeriesController extends Controller
      */
     public function store(Request $request)
     {
-        $form = \FormBuilder::create(SerieForm::class);
+        $form = \FormBuilder::create(VideoForm::class);
 
         if(!$form->isValid())
             return redirect()->back()->withErrors($form->getErrors)->withInput();
+
         $dados = $form->getFieldValues();
-        Model::unguard();
-        $dados['thumb'] = 'thumb.jpg';
         $this->repository->create($dados);
-        $request->session()->flash('message', 'Série criada com sucesso!');
-        return redirect()->route('admin.series.index');
+        $request->session()->flash('message', 'Vídeo cadastrado com sucesso!');
+        return redirect()->route('admin.videos.index');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \CodeFlix\Models\Serie  $series
+     * @param  \CodeFlix\Models\Video  $video
      * @return \Illuminate\Http\Response
      */
-    public function show(Serie $series)
+    public function show(Video $video)
     {
-        return view('admin.series.show', ['serie' => $series]);
+
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \CodeFlix\Models\Serie  $series
+     * @param  \CodeFlix\Models\Video  $video
      * @return \Illuminate\Http\Response
      */
-    public function edit(Serie $series)
+    public function edit(Video $video)
     {
-        $form = \FormBuilder::create(SerieForm::class, [
-            'url'       => route('admin.series.update', ['series' => $series->id]),
+        $form = \FormBuilder::create(VideoForm::class, [
+            'url'       => route('admin.videos.update', ['video' => $video->id]),
             'method'    => 'PUT',
-            'model'     => $series
+            'model'     => $video
         ]);
 
-        return view('admin.series.edit', compact('form'));
+        return view('admin.videos.edit', compact('form'));
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \CodeFlix\Models\Serie  $codeFlixModelsSerie
+     * @param  \CodeFlix\Models\Video  $video
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
     {
-        $form = \FormBuilder::create(SerieForm::class);
+        $form = \FormBuilder::create(VideoForm::class);
 
         if(!$form->isValid())
             return redirect()->back()->withErrors($form->getErrors)->withInput();
 
         $dados = $form->getFieldValues();
         $this->repository->update($dados, $id);
-        $request->session()->flash('message', 'Série alterada com sucesso!');
-        return redirect()->route('admin.series.index');
+        $request->session()->flash('message', 'Vídeo alterado com sucesso!');
+        return redirect()->back();
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \CodeFlix\Models\Serie  $codeFlixModelsSerie
+     * @param  \CodeFlix\Models\Video  $video
      * @return \Illuminate\Http\Response
      */
     public function destroy(Request $request, $id)
     {
-        $this->repository->delete($id);
-        $request->session()->flash('message', 'Série deletada com sucesso!');
-        return redirect()->route('admin.series.index');
+        /*
+            $this->repository->delete($id);
+            $request->session()->flash('message', 'Vídeo deletado com sucesso!');
+            return redirect()->route('admin.videos.index');
+        */
     }
 }

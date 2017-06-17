@@ -49,6 +49,7 @@ Route::get('email-verification/check/{token}', 'EmailVerificationController@getV
             Route::resource('users', 'UsersController');
             Route::resource('categories', 'CategoriesController');
             Route::resource('series', 'SeriesController');
+            Route::resource('videos', 'VideosController');
         });
     });
 

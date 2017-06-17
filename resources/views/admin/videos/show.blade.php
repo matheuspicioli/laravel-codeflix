@@ -6,11 +6,11 @@
             <div class="col-md-8 col-md-offset-2">
                 <div class="panel panel-default">
                     <div class="panel-heading text-center">
-                        <h1>Descrição de série</h1>
+                        <h1>Descrição do vídeo</h1>
                         <div class="row">
-                            {!! Button::primary(Icon::create('pencil'))->asLinkTo(route('admin.series.edit',['serie' => $serie->id])) !!}
+                            {!! Button::primary(Icon::create('pencil'))->asLinkTo(route('admin.video.edit',['video' => $video->id])) !!}
                             {!! Button::danger(Icon::create('remove'))
-                                    ->asLinkTo(route('admin.series.destroy', ['serie' => $serie->id]))
+                                    ->asLinkTo(route('admin.videos.destroy', ['video' => $video->id]))
                                      ->addAttributes(['onclick' => "event.preventDefault();document.getElementById(\"form-delete\").submit();"])
                             !!}
                         </div>
@@ -18,7 +18,7 @@
                     <div class="panel-body">
                         @php $formDelete = FormBuilder::plain([
                                 'id'        => 'form-delete',
-                                'route'     => ['admin.series.destroy','serie' => $serie->id],
+                                'route'     => ['admin.videos.destroy','video' => $video->id],
                                 'method'    => 'DELETE',
                                 'style'     => 'display:none'
                             ]) @endphp
@@ -27,15 +27,15 @@
                             <tbody>
                                 <tr>
                                     <th scope="row">#</th>
-                                    <td>{{ $serie->id }}</td>
+                                    <td>{{ $video->id }}</td>
                                 </tr>
                                 <tr>
                                     <th scope="row">Título</th>
-                                    <td>{{ $serie->title }}</td>
+                                    <td>{{ $video->title }}</td>
                                 </tr>
                                 <tr>
                                     <th scope="row">Descrição</th>
-                                    <td>{{ $serie->description }}</td>
+                                    <td>{{ $video->description }}</td>
                                 </tr>
                             </tbody>
                         </table>
