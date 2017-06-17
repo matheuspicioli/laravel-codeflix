@@ -49,6 +49,10 @@ Route::get('email-verification/check/{token}', 'EmailVerificationController@getV
             Route::resource('users', 'UsersController');
             Route::resource('categories', 'CategoriesController');
             Route::resource('series', 'SeriesController');
+            Route::group(['prefix' => 'videos', 'as' => 'videos.'], function(){
+                Route::name('relations.create')->get('{video}/relations', 'VideoRelationsController@create');
+                Route::name('relations.store')->post('{video}/relations', 'VideoRelationsController@store');
+            });//antes do resource de vídeos
             Route::resource('videos', 'VideosController');
         });
     });

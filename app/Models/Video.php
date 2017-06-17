@@ -1,6 +1,6 @@
 <?php
 
-namespace Codeflix\Models;
+namespace CodeFlix\Models;
 
 use Bootstrapper\Interfaces\TableInterface;
 use Illuminate\Database\Eloquent\Model;
