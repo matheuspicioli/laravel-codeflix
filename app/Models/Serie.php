@@ -3,13 +3,16 @@
 namespace Codeflix\Models;
 
 use Bootstrapper\Interfaces\TableInterface;
+use CodeFlix\Media\SeriePaths;
 use Illuminate\Database\Eloquent\Model;
 use Prettus\Repository\Contracts\Transformable;
 use Prettus\Repository\Traits\TransformableTrait;
 
 class Serie extends Model implements TableInterface
 {
-    protected $fillable = ['title', 'description'];
+    use SeriePaths;
+
+    protected $fillable = ['title', 'description', 'thumb'];
 
     /**
      * A list of headers to be used when a table is displayed
@@ -19,9 +22,7 @@ class Serie extends Model implements TableInterface
     public function getTableHeaders()
     {
         return [
-            '#',
-            'Título',
-            'Descrição'
+            '#'
         ];
     }
 
@@ -37,10 +38,6 @@ class Serie extends Model implements TableInterface
         switch($header){
             case '#':
                 return $this->id;
-            case 'Título':
-                return $this->title;
-            case 'Descrição':
-                return $this->description;
         }
     }
 }

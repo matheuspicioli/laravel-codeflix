@@ -60,7 +60,7 @@ class CategoriesController extends Controller
         if(!$form->isValid()){
             return redirect()
                     ->back()
-                    ->withErrors($form->getErrors)
+                    ->withErrors($form->getErrors())
                     ->withInput();
         }
 
@@ -112,7 +112,7 @@ class CategoriesController extends Controller
         if(!$form->isValid()){
             return redirect()
                 ->back()
-                ->withErrors($form->getErrors)
+                ->withErrors($form->getErrors())
                 ->withInput();
         }
 

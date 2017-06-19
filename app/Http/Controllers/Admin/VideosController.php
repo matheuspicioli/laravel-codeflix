@@ -58,7 +58,7 @@ class VideosController extends Controller
         $form = \FormBuilder::create(VideoForm::class);
 
         if(!$form->isValid())
-            return redirect()->back()->withErrors($form->getErrors)->withInput();
+            return redirect()->back()->withErrors($form->getErrors())->withInput();
 
         $dados = $form->getFieldValues();
         $this->repository->create($dados);
@@ -106,7 +106,7 @@ class VideosController extends Controller
         $form = \FormBuilder::create(VideoForm::class);
 
         if(!$form->isValid())
-            return redirect()->back()->withErrors($form->getErrors)->withInput();
+            return redirect()->back()->withErrors($form->getErrors())->withInput();
 
         $dados = $form->getFieldValues();
         $this->repository->update($dados, $id);

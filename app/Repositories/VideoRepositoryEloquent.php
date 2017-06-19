@@ -2,6 +2,7 @@
 
 namespace CodeFlix\Repositories;
 
+use CodeFlix\Media\ThumbUploads;
 use Prettus\Repository\Eloquent\BaseRepository;
 use Prettus\Repository\Criteria\RequestCriteria;
 use CodeFlix\Models\Video;
@@ -12,6 +13,8 @@ use CodeFlix\Models\Video;
  */
 class VideoRepositoryEloquent extends BaseRepository implements VideoRepository
 {
+    use ThumbUploads;
+
     public function update(array $attributes, $id)
     {
         $model = parent::update($attributes, $id);

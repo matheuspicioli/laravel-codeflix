@@ -2,16 +2,34 @@
 
 namespace CodeFlix\Repositories;
 
+use CodeFlix\Media\ThumbUploads;
 use Prettus\Repository\Eloquent\BaseRepository;
 use Prettus\Repository\Criteria\RequestCriteria;
 use CodeFlix\Models\Serie;
 
 /**
  * Class SerieRepositoryEloquent
- * @package namespace Codeflix\Repositories;
+ * @package namespace CodeFlix\Repositories;
  */
 class SerieRepositoryEloquent extends BaseRepository implements SerieRepository
 {
+    use ThumbUploads;
+
+    public function create(array $attributes)
+    {
+        $model = parent::create(array_except($attributes, 'thumb_file'));
+        $this->uploadThumb($model->id, $attributes['thumb_file']);
+    }
+
+    public function update(array $attributes, $id)
+    {
+        $model = parent::update(array_except($attributes, 'thumb_file'), $id);
+        if(isset($attributes['thumb_file'])){
+            $this->uploadThumb($model->id, $attributes['thumb_file']);
+        }
+        return $model;
+    }
+
     /**
      * Specify Model class name
      *

@@ -4,9 +4,11 @@ namespace CodeFlix\Models;
 
 use Bootstrapper\Interfaces\TableInterface;
 use Illuminate\Database\Eloquent\Model;
+use CodeFlix\Media\VideoPaths;
 
 class Video extends Model implements TableInterface
 {
+    use VideoPaths;
     protected $fillable = [
         'title',
         'description',
