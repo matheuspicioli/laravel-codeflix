@@ -8,7 +8,7 @@
                     <div class="panel-heading text-center">
                         <h1>Descrição do vídeo</h1>
                         <div class="row">
-                            {!! Button::primary(Icon::create('pencil'))->asLinkTo(route('admin.video.edit',['video' => $video->id])) !!}
+                            {!! Button::primary(Icon::create('pencil'))->asLinkTo(route('admin.videos.edit',['video' => $video->id])) !!}
                             {!! Button::danger(Icon::create('remove'))
                                     ->asLinkTo(route('admin.videos.destroy', ['video' => $video->id]))
                                      ->addAttributes(['onclick' => "event.preventDefault();document.getElementById(\"form-delete\").submit();"])
@@ -28,6 +28,18 @@
                                 <tr>
                                     <th scope="row">#</th>
                                     <td>{{ $video->id }}</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">Thumb</th>
+                                    <td>
+                                        <img src="{{ $video->thumb_asset }}" width="512" height="360" alt="Thumbnail">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">Vídeo</th>
+                                    <td>
+                                        <a href="{{ $video->file_asset }}" target="_blank">Download</a>
+                                    </td>
                                 </tr>
                                 <tr>
                                     <th scope="row">Título</th>

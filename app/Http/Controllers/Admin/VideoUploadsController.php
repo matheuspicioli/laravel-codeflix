@@ -50,7 +50,14 @@ class VideoUploadsController extends Controller
         if(!$form->isValid())
             return redirect()->back()->withErrors($form->getErrors())->withInput();
 
-        $this->repository->uploadThumb($id, $request->file('thumb'));
+        if($request->file('thumb'))
+            $this->repository->uploadThumb($id, $request->file('thumb'));
+
+        if($request->file('file'))
+            $this->repository->uploadFile($id, $request->file('file'));
+
+        $this->repository->update(['duration' => $request->get('duration')], $id);
+
         $request->session()->flash('message', 'Upload(s) realizado(s) com sucesso!');
         return redirect()->route('admin.videos.uploads.create', ['video' => $id]);
     }

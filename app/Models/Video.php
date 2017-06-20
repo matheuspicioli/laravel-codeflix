@@ -5,16 +5,21 @@ namespace CodeFlix\Models;
 use Bootstrapper\Interfaces\TableInterface;
 use Illuminate\Database\Eloquent\Model;
 use CodeFlix\Media\VideoPaths;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Video extends Model implements TableInterface
 {
-    use VideoPaths;
+    use VideoPaths; use SoftDeletes;
     protected $fillable = [
         'title',
         'description',
         'duration',
         'published',
         'serie_id'
+    ];
+
+    protected $casts = [
+        'completed' => 'boolean'
     ];
 
     public function serie()

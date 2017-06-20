@@ -16,3 +16,19 @@ use Illuminate\Http\Request;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+/*Route::get('/test', function(){
+   return "Hello world API";
+});*/
+
+ApiRoute::version('v1', function(){
+    ApiRoute::get('/test', function(){
+        return 'v1';
+    });
+});
+
+ApiRoute::version('v2', function(){
+    ApiRoute::get('/test', function(){
+        return 'v2';
+    });
+});

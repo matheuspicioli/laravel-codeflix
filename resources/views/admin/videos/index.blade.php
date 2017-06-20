@@ -18,8 +18,8 @@
                                 ->callback('Descrição', function($field, $video){
                                     return MediaObject::withContents(
                                         [
-                                            'image'     => '//placehold.it/64x64',
-                                            'link'      => '#',
+                                            'image'     => $video->thumb_small_asset,
+                                            'link'      => $video->file_asset,
                                             'heading'   => $video->title,
                                             'body'      => $video->description
                                         ]

@@ -3,6 +3,8 @@
 namespace CodeFlix\Repositories;
 
 use CodeFlix\Media\ThumbUploads;
+use CodeFlix\Media\Uploads;
+use CodeFlix\Media\VideoUploads;
 use Prettus\Repository\Eloquent\BaseRepository;
 use Prettus\Repository\Criteria\RequestCriteria;
 use CodeFlix\Models\Video;
@@ -13,7 +15,7 @@ use CodeFlix\Models\Video;
  */
 class VideoRepositoryEloquent extends BaseRepository implements VideoRepository
 {
-    use ThumbUploads;
+    use ThumbUploads, VideoUploads, Uploads;
 
     public function update(array $attributes, $id)
     {
@@ -33,8 +35,6 @@ class VideoRepositoryEloquent extends BaseRepository implements VideoRepository
     {
         return Video::class;
     }
-
-    
 
     /**
      * Boot up the repository, pushing criteria
