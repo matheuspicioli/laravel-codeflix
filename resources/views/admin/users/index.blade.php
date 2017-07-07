@@ -6,7 +6,7 @@
             <div class="col-md-8 col-md-offset-2">
                 <div class="panel panel-default">
                     <div class="panel-heading text-center">
-                        <h1>Usuarios</h1>
+                        <h1>Usuários</h1>
                         <div class="row">
                             {!! Button::primary('Novo usuário')->asLinkTo(route('admin.users.create')) !!}
                         </div>
